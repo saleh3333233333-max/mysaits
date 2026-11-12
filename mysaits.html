@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سایت‌های من | پنل کاربری</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap');
+
+:root {
+  --bg:#080817;
+  --panel:#12122a;
+  --panel2:#191938;
+  --purple:#a855f7;
+  --blue:#38bdf8;
+  --text:#f5f3ff;
+  --muted:#aaa8c8;
+  --border:#ffffff18;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'Vazirmatn',sans-serif;min-height:100vh;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+  radial-gradient(circle at 15% 20%,#6d28d933,transparent 35%),
+  radial-gradient(circle at 85% 70%,#0284c733,transparent 35%);
+}
+#particles{position:fixed;inset:0;z-index:-1;pointer-events:none}
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 7%;border-bottom:1px solid var(--border);
+  background:#080817c9;backdrop-filter:blur(15px);
+  position:sticky;top:0;z-index:5;
+}
+.logo{font-size:22px;font-weight:900}
+.logo span{color:var(--blue)}
+nav{display:flex;gap:10px;flex-wrap:wrap}
+button,.btn{
+  border:0;border-radius:12px;padding:11px 17px;
+  color:white;font-family:inherit;font-weight:700;cursor:pointer;
+  background:linear-gradient(110deg,#9333ea,#2563eb);
+  transition:.2s;text-decoration:none;display:inline-block;
+}
+button:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.15)}
+button.secondary,.secondary{background:#ffffff12;border:1px solid var(--border)}
+button.danger{background:#be123c}
+button.success{background:#059669}
+main{max-width:1150px;margin:auto;padding:35px 20px}
+.hero{
+  min-height:340px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:50px 15px;
+}
+.hero h1{font-size:clamp(32px,6vw,58px);margin:0 0 12px}
+.gradient{
+  background:linear-gradient(90deg,#c084fc,#38bdf8);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero p{color:var(--muted);max-width:650px;line-height:2}
+.section-title{font-size:24px;margin:30px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:17px}
+.card{
+  background:linear-gradient(145deg,#191936dd,#101024ed);
+  border:1px solid var(--border);border-radius:19px;padding:22px;
+  box-shadow:0 12px 35px #0003;transition:.25s;
+}
+.card:hover{transform:translateY(-5px);border-color:#a855f777}
+.card .emoji{font-size:35px}
+.card h3{margin:10px 0}
+.card p{color:var(--muted);line-height:1.9;font-size:14px}
+.page{display:none;animation:fade .3s}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+input,textarea,select{
+  width:100%;padding:13px 14px;margin:7px 0 15px;
+  border:1px solid var(--border);border-radius:11px;
+  background:#09091c;color:white;font-family:inherit;outline:none;
+}
+input:focus,textarea:focus{border-color:var(--purple)}
+textarea{min-height:120px;resize:vertical}
+label{font-size:14px;color:#d5d2ed}
+.form-box{max-width:480px;margin:30px auto}
+.form-box h2{text-align:center}
+.muted{color:var(--muted)}
+.ticket{
+  background:#ffffff09;border:1px solid var(--border);
+  border-radius:14px;padding:17px;margin:12px 0;
+}
+.ticket-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.status{font-size:12px;color:#86efac}
+.closed{color:#fda4af}
+.reply{background:#ffffff0b;padding:12px;border-radius:10px;margin-top:10px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid var(--border);margin-top:50px}
+.small{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}
+#notice{
+  position:fixed;bottom:20px;left:20px;background:#242448;
+  border:1px solid var(--border);padding:13px 20px;
+  border-radius:12px;display:none;z-index:20
+}
+@media(max-width:600px){
+ header{padding:14px;align-items:flex-start;gap:10px;flex-direction:column}
+ nav{width:100%}nav button{flex:1}
+}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<header>
+  <div class="logo">سایت‌های <span>من</span> ✦</div>
+  <nav>
+    <button class="secondary" onclick="showPage('home')">خانه</button>
+    <button class="secondary" onclick="showPage('sites')">سایت‌های من</button>
+    <button class="secondary" onclick="showPage('support')">پشتیبانی</button>
+    <button id="accountBtn" onclick="showPage('login')">ورود / ثبت‌نام</button>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="page active">
+    <div class="hero">
+      <h1>به دنیای <span class="gradient">سایت‌های من</span> خوش آمدی</h1>
+      <p>یک فضای مدرن برای دسترسی به سایت‌ها، مدیریت حساب کاربری و ارتباط با پشتیبانی. همه‌چیز در یک جا!</p>
+      <div class="actions">
+        <button onclick="showPage('sites')">مشاهده سایت‌ها</button>
+        <button class="secondary" onclick="showPage('support')">ارسال تیکت</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">✨ امکانات مجموعه</h2>
+    <div class="grid">
+      <div class="card"><div class="emoji">🌐</div><h3>سایت‌های من</h3><p>دسترسی سریع به سایت‌ها و سرویس‌های مجموعه.</p><button onclick="showPage('sites')">مشاهده</button></div>
+      <div class="card"><div class="emoji">👤</div><h3>حساب کاربری</h3><p>ساخت حساب و ورود به پنل شخصی.</p><button onclick="showPage('login')">ورود</button></div>
+      <div class="card"><div class="emoji">🎫</div><h3>پشتیبانی</h3><p>ارسال درخواست و مشاهده پاسخ‌های پشتیبانی.</p><button onclick="showPage('support')">ثبت تیکت</button></div>
+    </div>
+  </section>
+
+  <section id="sites" class="page">
+    <h2 class="section-title">🌐 سایت‌های من</h2>
+    <p class="muted">لینک‌ها و سرویس‌های مجموعه در این قسمت قرار می‌گیرند.</p>
+    <div class="grid" id="siteGrid">
+      <div class="card"><div class="emoji">🚀</div><h3>سایت اصلی</h3><p>صفحه اصلی مجموعه</p><a class="btn" href="#" onclick="notice('لینک سایت اصلی هنوز تنظیم نشده');return false">ورود به سایت</a></div>
+      <div class="card"><div class="emoji">📱</div><h3>کانال روبیکا</h3><p>ارتباط با کانال رسمی</p><a class="btn" href="https://rubika.ir" target="_blank">مشاهده روبیکا</a></div>
+      <div class="card"><div class="emoji">💬</div><h3>پشتیبانی</h3><p>برای ارتباط با مدیر مجموعه</p><button onclick="showPage('support')">ارتباط</button></div>
+    </div>
+  </section>
+
+  <section id="login" class="page">
+    <div class="card form-box">
+      <h2>ورود به حساب</h2>
+      <label>نام کاربری</label><input id="loginUser" placeholder="نام کاربری">
+      <label>رمز عبور</label><input id="loginPass" type="password" placeholder="رمز عبور">
+      <button style="width:100%" onclick="login()">ورود</button>
+      <p class="muted">حساب نداری؟ <a href="#" onclick="showPage('register')">ثبت‌نام کن</a></p>
+      <p class="small">ورود مدیر از همین قسمت انجام می‌شود.</p>
+    </div>
+  </section>
+
+  <section id="register" class="page">
+    <div class="card form-box">
+      <h2>ساخت حساب جدید</h2>
+      <label>نام کاربری</label><input id="regUser" placeholder="نام کاربری">
+      <label>رمز عبور</label><input id="regPass" type="password" placeholder="حداقل ۶ کاراکتر">
+      <label>تکرار رمز عبور</label><input id="regPass2" type="password" placeholder="تکرار رمز">
+      <button style="width:100%" onclick="register()">ثبت‌نام</button>
+      <p class="muted">حساب داری؟ <a href="#" onclick="showPage('login')">وارد شو</a></p>
+    </div>
+  </section>
+
+  <section id="dashboard" class="page">
+    <h2 class="section-title">👋 پنل کاربری</h2>
+    <div class="card">
+      <h3 id="welcome"></h3>
+      <p class="muted">به پنل کاربری خودت خوش آمدی.</p>
+      <div class="actions">
+        <button onclick="showPage('support')">ثبت تیکت جدید</button>
+        <button class="secondary" onclick="showPage('myTickets')">تیکت‌های من</button>
+        <button class="danger" onclick="logout()">خروج</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="support" class="page">
+    <h2 class="section-title">🎫 پشتیبانی و ارسال تیکت</h2>
+    <div class="card">
+      <div id="ticketLoginMessage" class="muted">برای ارسال تیکت ابتدا وارد حساب خود شوید.</div>
+      <div id="ticketForm" class="hidden">
+        <label>موضوع تیکت</label><input id="ticketSubject" placeholder="موضوع درخواست">
+        <label>توضیحات</label><textarea id="ticketMessage" placeholder="مشکل یا درخواست خود را توضیح دهید..."></textarea>
+        <button onclick="createTicket()">ارسال تیکت</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="myTickets" class="page">
+    <h2 class="section-title">📨 تیکت‌های من</h2>
+    <div id="myTicketList"></div>
+  </section>
+
+  <section id="admin" class="page">
+    <h2 class="section-title">🛠 پنل مدیریت OWNER</h2>
+    <div class="grid">
+      <div class="card"><div class="emoji">🎫</div><h3>مدیریت تیکت‌ها</h3><p id="ticketCount">۰ تیکت</p></div>
+      <div class="card"><div class="emoji">👥</div><h3>کاربران</h3><p id="userCount">۰ کاربر</p></div>
+    </div>
+    <h3 class="section-title">همه تیکت‌ها</h3>
+    <div id="adminTicketList"></div>
+    <button class="danger" onclick="logout()">خروج از مدیریت</button>
+  </section>
+</main>
+
+<footer>ساخته شده با ❤️ | سایت‌های من © 2026</footer>
+<div id="notice"></div>
+
+<script>
+const OWNER_USER = "OWNER";
+const OWNER_PASS = "s3a3l3e3h23";
+
+let users = JSON.parse(localStorage.getItem("sm_users") || "[]");
+let tickets = JSON.parse(localStorage.getItem("sm_tickets") || "[]");
+let currentUser = sessionStorage.getItem("sm_current") || null;
+
+function save(){
+  localStorage.setItem("sm_users",JSON.stringify(users));
+  localStorage.setItem("sm_tickets",JSON.stringify(tickets));
+}
+function notice(msg){
+  const n=document.getElementById("notice");
+  n.textContent=msg;n.style.display="block";
+  setTimeout(()=>n.style.display="none",2600);
+}
+function showPage(id){
+  if(id==="dashboard" && !currentUser){id="login"}
+  if(id==="myTickets" && !currentUser){id="login"}
+  if(id==="admin" && currentUser!==OWNER_USER){id="login"}
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  render();
+}
+function register(){
+  const u=document.getElementById("regUser").value.trim();
+  const p=document.getElementById("regPass").value;
+  const p2=document.getElementById("regPass2").value;
+  if(!u || p.length<6)return notice("نام کاربری و رمز حداقل ۶ کاراکتری وارد کنید.");
+  if(p!==p2)return notice("رمزها یکسان نیستند.");
+  if(u.toUpperCase()===OWNER_USER || users.some(x=>x.username.toLowerCase()===u.toLowerCase()))return notice("این نام کاربری قبلاً ثبت شده.");
+  users.push({username:u,password:p});
+  save();notice("ثبت‌نام با موفقیت انجام شد.");
+  showPage("login");
+}
+function login(){
+  const u=document.getElementById("loginUser").value.trim();
+  const p=document.getElementById("loginPass").value;
+  if(u===OWNER_USER && p===OWNER_PASS){
+    currentUser=OWNER_USER;
+  }else{
+    const found=users.find(x=>x.username.toLowerCase()===u.toLowerCase() && x.password===p);
+    if(!found)return notice("نام کاربری یا رمز عبور اشتباه است.");
+    currentUser=found.username;
+  }
+  sessionStorage.setItem("sm_current",currentUser);
+  notice("ورود موفقیت‌آمیز بود.");
+  showPage(currentUser===OWNER_USER?"admin":"dashboard");
+}
+function logout(){
+  currentUser=null;sessionStorage.removeItem("sm_current");
+  notice("از حساب خارج شدید.");showPage("home");
+}
+function createTicket(){
+  const subject=document.getElementById("ticketSubject").value.trim();
+  const message=document.getElementById("ticketMessage").value.trim();
+  if(!subject || !message)return notice("همه فیلدها را تکمیل کنید.");
+  tickets.unshift({
+    id:Date.now(),username:currentUser,subject,message,
+    status:"باز",replies:[],created:new Date().toLocaleString("fa-IR")
+  });
+  save();
+  document.getElementById("ticketSubject").value="";
+  document.getElementById("ticketMessage").value="";
+  notice("تیکت شما ثبت شد.");
+  showPage("myTickets");
+}
+function render(){
+  document.getElementById("accountBtn").textContent=currentUser?currentUser:"ورود / ثبت‌نام";
+  document.getElementById("accountBtn").onclick=()=>showPage(currentUser?(currentUser===OWNER_USER?"admin":"dashboard"):"login");
+  document.getElementById("ticketLoginMessage").classList.toggle("hidden",!!currentUser);
+  document.getElementById("ticketForm").classList.toggle("hidden",!currentUser);
+  if(currentUser && currentUser!==OWNER_USER){
+    document.getElementById("welcome").textContent="سلام "+currentUser+" 🌟";
+  }
+  if(document.getElementById("myTickets")){
+    const mine=tickets.filter(t=>t.username===currentUser);
+    document.getElementById("myTicketList").innerHTML=mine.length?mine.map(t=>ticketHTML(t,false)).join(""):'<div class="card">هنوز تیکتی ثبت نکرده‌اید.</div>';
+  }
+  document.getElementById("ticketCount").textContent=tickets.length+" تیکت";
+  document.getElementById("userCount").textContent=users.length+" کاربر";
+  document.getElementById("adminTicketList").innerHTML=tickets.length?tickets.map(t=>ticketHTML(t,true)).join(""):'<div class="card">هنوز تیکتی وجود ندارد.</div>';
+}
+function ticketHTML(t,admin){
+  return `<div class="ticket">
+    <div class="ticket-head">
+      <strong>#${t.id} — ${escapeHTML(t.subject)}</strong>
+      <span class="${t.status==="باز"?"status":"closed"}">${t.status}</span>
+    </div>
+    <p>${escapeHTML(t.message)}</p>
+    <div class="small">کاربر: ${escapeHTML(t.username)} | ${escapeHTML(t.created)}</div>
+    ${(t.replies||[]).map(r=>`<div class="reply"><b>${escapeHTML(r.from)}:</b> ${escapeHTML(r.text)}</div>`).join("")}
+    ${admin?`
+      <div class="actions">
+        <input id="reply-${t.id}" placeholder="متن پاسخ مدیر">
+        <button class="success" onclick="replyTicket(${t.id})">ارسال پاسخ</button>
+        <button class="${t.status==="باز"?"danger":"secondary"}" onclick="toggleTicket(${t.id})">${t.status==="باز"?"بستن تیکت":"بازکردن مجدد"}</button>
+      </div>`:""}
+  </div>`;
+}
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function replyTicket(id){
+  const input=document.getElementById("reply-"+id);
+  const val=input.value.trim();if(!val)return notice("متن پاسخ را وارد کنید.");
+  const t=tickets.find(x=>x.id===id);if(!t)return;
+  t.replies.push({from:"مدیریت",text:val});
+  save();render();notice("پاسخ ارسال شد.");
+}
+function toggleTicket(id){
+  const t=tickets.find(x=>x.id===id);if(!t)return;
+  t.status=t.status==="باز"?"بسته":"باز";
+  save();render();notice("وضعیت تیکت تغییر کرد.");
+}
+render();
+if(currentUser)showPage(currentUser===OWNER_USER?"admin":"dashboard");
+
+/* پس‌زمینه متحرک */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+let dots=[];
+function resize(){
+  canvas.width=innerWidth;canvas.height=innerHeight;
+  dots=Array.from({length:65},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.45,vy:(Math.random()-.5)*.45}));
+}
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  dots.forEach((p,i)=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width)p.vx*=-1;
+    if(p.y<0||p.y>canvas.height)p.vy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,1.5,0,Math.PI*2);
+    ctx.fillStyle="#a78bfa";ctx.fill();
+    dots.slice(i+1).forEach(q=>{
+      const d=Math.hypot(p.x-q.x,p.y-q.y);
+      if(d<115){
+        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+        ctx.strokeStyle=`rgba(129,140,248,${.13*(1-d/115)})`;ctx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(animate);
+}
+addEventListener("resize",resize);resize();animate();
+</script>
+</body>
+</html>
